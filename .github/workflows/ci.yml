@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    name: smoke (node ${{ matrix.node-version }} / homebridge ${{ matrix.homebridge-version }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        # homebridge v2 requires Node.js >= 22, so the Node 20 + v2 combo
+        # is intentionally omitted.
+        include:
+          - { node-version: '20.x', homebridge-version: '^1.8.0' }
+          - { node-version: '22.x', homebridge-version: '^1.8.0' }
+          - { node-version: '24.x', homebridge-version: '^1.8.0' }
+          - { node-version: '22.x', homebridge-version: '^2.0.0' }
+          - { node-version: '24.x', homebridge-version: '^2.0.0' }
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install plugin dependencies
+        run: npm install --no-save
+      - name: Install target homebridge version (engine-strict)
+        env:
+          HOMEBRIDGE_VERSION: ${{ matrix.homebridge-version }}
+        # --engine-strict turns engines mismatches into install-time errors,
+        # so a bad combination (e.g. homebridge declaring node>=22 against a
+        # Node 20 runner) fails the job instead of warning and continuing.
+        run: npm install --no-save --engine-strict "homebridge@$HOMEBRIDGE_VERSION"
+      - name: Syntax check
+        run: |
+          node --check lib/index.js
+          node --check lib/parse.js
+          node --check lib/service.js
+      - name: Run tests
+        run: npm test

@@ -15,12 +15,15 @@ REMOTE / RacEstVis backend, so this fork keeps the existing reverse
 engineered protocol implementation and rebuilds the surrounding
 packaging.
 
-The current `2.0.0-alpha.x` line still targets Homebridge v1.x only; v2
-support will land in `2.0.0`.
+From `2.0.0-alpha.1` the plugin loads on both Homebridge `^1.8.0` and
+`^2.0.0`. The two removed-API calls were deleted; in v1.x they were
+already documented no-ops (`updateReachability`'s body is a single
+property assignment with no HAP-layer effect), so v1.x behavior is
+unchanged.
 
 ## Requirements
 
-- Homebridge `^1.8.0`
+- Homebridge `^1.8.0 || ^2.0.0`
 - Node.js `^20 || ^22 || ^24`
 
 ## Installation
