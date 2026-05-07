@@ -86,26 +86,17 @@ npm install -g @ikuwow/homebridge-mitsubishi-aircon
 
 ## Releasing
 
-Releases are automated via
-[release-please](https://github.com/googleapis/release-please-action)
-and gated through pull requests.
+Releases are automated via [release-please](https://github.com/googleapis/release-please-action) and gated through pull requests.
 
-1. Land changes on `master` using
-   [Conventional Commits](https://www.conventionalcommits.org/) in the
-   commit message (or, if you Squash & Merge, in the PR title):
+1. Land changes on `master` using [Conventional Commits](https://www.conventionalcommits.org/) in the commit message (or, if you Squash & Merge, in the PR title):
    - `feat: ...` for new features (minor bump)
    - `fix: ...` for bug fixes (patch bump)
-   - `feat!: ...` or a `BREAKING CHANGE:` footer for breaking changes
-     (major bump)
-   - `chore:`, `docs:`, `refactor:`, `test:`, `ci:` do not trigger a
-     release on their own
-2. release-please opens (or updates) a "Release PR" with the next
-   version and a `CHANGELOG.md` diff. Review and merge it.
-3. Merging the Release PR creates the GitHub Release + git tag and
-   publishes the package to npm automatically.
+   - `feat!: ...` or a `BREAKING CHANGE:` footer for breaking changes (major bump)
+   - `chore:`, `docs:`, `refactor:`, `test:`, `ci:` do not trigger a release on their own
+2. release-please opens (or updates) a "Release PR" with the next version and a `CHANGELOG.md` diff. Review and merge it.
+3. Merging the Release PR creates the GitHub Release + git tag and publishes the package to npm automatically.
 
-To force a specific version, add a `Release-As:` footer to any commit
-on `master`.
+To force a specific version, add a `Release-As:` footer to any commit on `master`.
 
 ## License
 
