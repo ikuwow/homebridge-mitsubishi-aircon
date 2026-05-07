@@ -27,6 +27,9 @@
     "node": "^20 || ^22 || ^24",
     "homebridge": "^1.8.0 || ^2.0.0"
   },
+  "scripts": {
+    "test": "node test/check-deprecated-apis.js && node test/smoke-load.js"
+  },
   "dependencies": {
     "interval-promise": "1.4.0",
     "node-fetch": "2.6.0",
