@@ -4,6 +4,10 @@
   "version": "2.0.0-alpha.1",
   "description": "Homebridge plugin for Mitsubishi air conditioners (Kirigamine REMOTE / RacEstVis Web service, Japan)",
   "main": "lib/index.js",
+  "files": [
+    "lib/",
+    "config.schema.json"
+  ],
   "keywords": [
     "homebridge-plugin",
     "homekit",
