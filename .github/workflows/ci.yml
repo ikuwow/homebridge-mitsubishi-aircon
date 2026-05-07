@@ -31,10 +31,13 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install plugin dependencies
         run: npm install --no-save
-      - name: Install target homebridge version
+      - name: Install target homebridge version (engine-strict)
         env:
           HOMEBRIDGE_VERSION: ${{ matrix.homebridge-version }}
-        run: npm install --no-save "homebridge@$HOMEBRIDGE_VERSION"
+        # --engine-strict turns engines mismatches into install-time errors,
+        # so a bad combination (e.g. homebridge declaring node>=22 against a
+        # Node 20 runner) fails the job instead of warning and continuing.
+        run: npm install --no-save --engine-strict "homebridge@$HOMEBRIDGE_VERSION"
       - name: Syntax check
         run: |
           node --check lib/index.js
