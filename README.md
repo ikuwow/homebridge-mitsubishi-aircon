@@ -45,6 +45,7 @@ npm install -g @ikuwow/homebridge-mitsubishi-aircon
   "platforms": [
     {
       "platform": "MitsubishiAircon",
+      "name": "Mitsubishi Aircon",
       "user": "USERNAME",
       "pass": "PASSWORD",
       "useDryForCool": false
@@ -56,6 +57,7 @@ npm install -g @ikuwow/homebridge-mitsubishi-aircon
 | Key | Type | Required | Description |
 |---|---|---|---|
 | `platform` | string | yes | Must be `MitsubishiAircon`. |
+| `name` | string | yes | Display label for the platform instance in the Homebridge UI and logs. The plugin itself does not read this value. |
 | `user` | string | yes | 霧ヶ峰 REMOTE / くらしID account username. |
 | `pass` | string | yes | Password for the same account. |
 | `useDryForCool` | boolean | no | When `true`, "Cool" in HomeKit drives the unit's dry (除湿) mode instead of standard cooling. Defaults to `false`. |
