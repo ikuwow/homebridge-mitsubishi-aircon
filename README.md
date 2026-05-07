@@ -94,7 +94,8 @@ Releases are automated via [release-please](https://github.com/googleapis/releas
    - `feat: ...` for new features (minor bump)
    - `fix: ...` for bug fixes (patch bump)
    - `feat!: ...` or a `BREAKING CHANGE:` footer for breaking changes (major bump)
-   - `chore:`, `docs:`, `refactor:`, `test:`, `ci:` do not trigger a release on their own
+   - `chore:`, `docs:`, `refactor:`, `test:`, `ci:`, `build:` do not trigger a release on their own — use these for workflow / CI / infrastructure / dev-tooling changes that should not open a Release PR by themselves
+   - `.github/workflows/*` edits should default to `ci:` or `chore:` unless the change itself ships a user-facing fix
 2. release-please opens (or updates) a "Release PR" with the next version and a `CHANGELOG.md` diff. Review and merge it.
 3. Merging the Release PR creates the GitHub Release + git tag and publishes the package to npm automatically.
 
