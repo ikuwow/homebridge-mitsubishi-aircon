@@ -7,14 +7,18 @@
 const fs = require('fs')
 const path = require('path')
 
+// `.reachable` keeps the dot prefix because "reachable" alone is a common
+// English word that would false-positive on local variables; the API
+// surface in question is always property/method access. `updateReachability`
+// is rare enough as a bare identifier to use a plain word boundary.
 const FORBIDDEN = [
-  { pattern: /\.updateReachability\b/, name: 'updateReachability() removed in homebridge v2' },
-  { pattern: /\.reachable\b/, name: 'reachable property removed in homebridge v2' },
+  { pattern: /\bupdateReachability\b/, name: 'updateReachability() removed in homebridge v2' },
+  { pattern: /\.reachable\b/, name: 'reachable accessor removed in homebridge v2 (reachability is no longer supported)' },
   { pattern: /\bgetServiceByUUIDAndSubType\b/, name: 'getServiceByUUIDAndSubType removed; use getServiceById' },
   { pattern: /\bBatteryService\b/, name: 'BatteryService removed; use Battery' },
   { pattern: /\bAccessoryLoader\b/, name: 'AccessoryLoader removed' },
   { pattern: /\buseLegacyAdvertiser\b/, name: 'useLegacyAdvertiser removed' },
-  { pattern: /\bconfigureCameraSource\b/, name: 'configureCameraSource removed; use CameraController' },
+  { pattern: /\b(configureCameraSource|cameraSource)\b/, name: 'cameraSource / configureCameraSource removed; use CameraController' },
   { pattern: /Characteristic\.(Units|Formats|Perms)\b/, name: 'Characteristic.{Units|Formats|Perms} moved to api.hap' },
   { pattern: /\.getValue\(/, name: 'Characteristic.getValue() removed; use .value' },
   { pattern: /PROGRAM_SCHEDULED_MANUAL_MODE_/, name: 'PROGRAM_SCHEDULED_MANUAL_MODE_ renamed (trailing underscore removed)' },

@@ -10,7 +10,6 @@ const assert = require('assert')
 const path = require('path')
 
 const pluginPath = path.resolve(__dirname, '..', 'lib', 'index.js')
-delete require.cache[pluginPath]
 
 const registered = []
 const mockHomebridge = {
@@ -36,8 +35,8 @@ assert.strictEqual(typeof pluginExport, 'function', 'plugin must export a functi
 pluginExport(mockHomebridge)
 assert.strictEqual(registered.length, 1, 'registerPlatform must be called exactly once')
 const entry = registered[0]
-assert.strictEqual(entry.platformName, 'MitsubishiAircon')
-assert.strictEqual(entry.dynamic, true)
+assert.strictEqual(entry.platformName, 'MitsubishiAircon', 'platformName must be "MitsubishiAircon"')
+assert.strictEqual(entry.dynamic, true, 'platform must be registered as dynamic')
 assert.strictEqual(typeof entry.ctor, 'function', 'platform constructor must be a function')
 
 const Platform = entry.ctor
