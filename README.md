@@ -17,11 +17,10 @@ REMOTE / RacEstVis backend, so this fork keeps the existing reverse
 engineered protocol implementation and rebuilds the surrounding
 packaging.
 
-From `2.0.0-alpha.1` the plugin loads on both Homebridge `^1.8.0` and
-`^2.0.0`. The two removed-API calls were deleted; in v1.x they were
-already documented no-ops (`updateReachability`'s body is a single
-property assignment with no HAP-layer effect), so v1.x behavior is
-unchanged.
+From `2.0.0` the plugin loads on both Homebridge `^1.8.0` and `^2.0.0`.
+The two removed-API calls were deleted; in v1.x they were already
+documented no-ops (`updateReachability`'s body is a single property
+assignment with no HAP-layer effect), so v1.x behavior is unchanged.
 
 ## Requirements
 

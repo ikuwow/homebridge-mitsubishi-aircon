@@ -61,9 +61,8 @@ jobs:
       - name: Show package contents
         run: npm pack --dry-run
 
-      # `--tag latest` is explicit so prereleases also land on the `latest`
-      # dist-tag while we are still in the alpha phase. npm CLI 11.x refuses
-      # to publish a prerelease without an explicit --tag. Revisit this when
-      # cutting the first stable 2.0.0 release.
+      # `--tag latest` is explicit. npm CLI 11.x refuses to publish a
+      # prerelease without an explicit --tag, and stable releases also
+      # belong on the `latest` dist-tag, so the same flag works for both.
       - name: Publish to npm
         run: npm publish --access public --tag latest
