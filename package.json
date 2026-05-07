@@ -8,10 +8,12 @@
     "homekit",
     "mitsubishi",
     "aircon",
-    "kirigamine"
+    "kirigamine",
+    "三菱",
+    "霧ヶ峰"
   ],
   "license": "CC-BY-NC-SA-4.0",
-  "author": "Ikuo Degawa",
+  "author": "ikuwow (https://github.com/ikuwow)",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ikuwow/homebridge-mitsubishi-aircon.git"
