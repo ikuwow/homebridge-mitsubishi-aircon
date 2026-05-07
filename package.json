@@ -1,19 +1,31 @@
 {
-  "name": "homebridge-mitsubishi-aircon",
-  "version": "1.0.3",
+  "name": "@ikuwow/homebridge-mitsubishi-aircon",
+  "displayName": "Mitsubishi Aircon",
+  "version": "2.0.0-alpha.0",
+  "description": "Homebridge plugin for Mitsubishi air conditioners (Kirigamine REMOTE / RacEstVis Web service, Japan)",
   "main": "lib/index.js",
   "keywords": [
     "homebridge-plugin",
-    "homekit"
+    "homekit",
+    "mitsubishi",
+    "aircon",
+    "kirigamine",
+    "三菱",
+    "霧ヶ峰"
   ],
-  "licenses": [
-    {
-      "name": "cc by-nc-sa 4.0",
-      "url": "http://creativecommons.org/licenses/by-nc-sa/4.0/"
-    }
-  ],
+  "license": "CC-BY-NC-SA-4.0",
+  "author": "ikuwow (https://github.com/ikuwow)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ikuwow/homebridge-mitsubishi-aircon.git"
+  },
+  "homepage": "https://github.com/ikuwow/homebridge-mitsubishi-aircon#readme",
+  "bugs": {
+    "url": "https://github.com/ikuwow/homebridge-mitsubishi-aircon/issues"
+  },
   "engines": {
-    "homebridge": ">= 0.4.0"
+    "node": "^20 || ^22 || ^24",
+    "homebridge": "^1.8.0"
   },
   "dependencies": {
     "interval-promise": "1.4.0",

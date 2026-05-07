@@ -1,0 +1,32 @@
+{
+  "pluginAlias": "MitsubishiAircon",
+  "pluginType": "platform",
+  "singular": true,
+  "schema": {
+    "type": "object",
+    "required": ["name", "user", "pass"],
+    "additionalProperties": false,
+    "properties": {
+      "name": {
+        "title": "Name",
+        "type": "string",
+        "default": "Mitsubishi Aircon"
+      },
+      "user": {
+        "title": "Username",
+        "type": "string"
+      },
+      "pass": {
+        "title": "Password",
+        "type": "string",
+        "format": "password"
+      },
+      "useDryForCool": {
+        "title": "Use Dry mode for Cooling",
+        "type": "boolean",
+        "default": false,
+        "description": "When enabled, HomeKit's Cool mode drives the unit's dry (除湿) mode instead of standard cooling."
+      }
+    }
+  }
+}
