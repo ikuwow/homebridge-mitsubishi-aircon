@@ -4,50 +4,62 @@ on:
   push:
     branches: [master]
 
+# Serialize runs on the same ref so a publish in flight is not raced by the
+# next master push. We keep an in-flight publish running rather than canceling
+# it, since killing npm publish midway can leave npm in an inconsistent state.
+concurrency:
+  group: release-please-${{ github.ref }}
+  cancel-in-progress: false
+
 permissions:
   contents: write
   issues: write
   pull-requests: write
-  id-token: write
 
 jobs:
   release-please:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
     steps:
       - uses: googleapis/release-please-action@v5
         id: release
         with:
           release-type: node
 
-      # The steps below run only when a Release PR was just merged
-      # (i.e. release-please created a new GitHub Release + tag).
+  publish:
+    needs: release-please
+    if: ${{ needs.release-please.outputs.release_created == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      id-token: write
+    steps:
       - uses: actions/checkout@v6
-        if: ${{ steps.release.outputs.release_created }}
 
       - uses: actions/setup-node@v6
-        if: ${{ steps.release.outputs.release_created }}
         with:
           node-version: 24
           registry-url: 'https://registry.npmjs.org'
 
       # npm Trusted Publishing requires npm CLI >= 11.5.1.
       - name: Upgrade npm to latest
-        if: ${{ steps.release.outputs.release_created }}
         run: npm install -g npm@latest
 
+      - name: Show npm version
+        run: npm --version
+
       - name: Install dependencies
-        if: ${{ steps.release.outputs.release_created }}
         run: npm install --no-save
 
-      - name: Run tests
-        if: ${{ steps.release.outputs.release_created }}
+      # Re-run tests against the merged commit; a failure here aborts publish.
+      - name: Run tests (publish gate)
         run: npm test
 
       - name: Show package contents
-        if: ${{ steps.release.outputs.release_created }}
         run: npm pack --dry-run
 
       - name: Publish to npm
-        if: ${{ steps.release.outputs.release_created }}
         run: npm publish --access public

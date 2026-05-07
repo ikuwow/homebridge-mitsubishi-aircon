@@ -98,6 +98,8 @@ Releases are automated via [release-please](https://github.com/googleapis/releas
 
 To force a specific version, add a `Release-As:` footer to any commit on `master`.
 
+If `npm publish` fails after the GitHub Release was already created (e.g. transient registry issue or a missing Trusted Publisher configuration), re-run only the failed jobs from the workflow run page (Actions tab → the failed run → "Re-run failed jobs"). The tag and Release are reused; only the publish job replays.
+
 ## License
 
 [CC BY-NC-SA 4.0](LICENSE)
