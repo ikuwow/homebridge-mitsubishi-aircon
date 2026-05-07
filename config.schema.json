@@ -1,0 +1,31 @@
+{
+  "pluginAlias": "MitsubishiAircon",
+  "pluginType": "platform",
+  "singular": true,
+  "schema": {
+    "type": "object",
+    "required": ["user", "pass"],
+    "additionalProperties": false,
+    "properties": {
+      "name": {
+        "title": "Name",
+        "type": "string",
+        "default": "Mitsubishi Aircon"
+      },
+      "user": {
+        "title": "Username",
+        "type": "string"
+      },
+      "pass": {
+        "title": "Password",
+        "type": "string",
+        "format": "password"
+      },
+      "useDryForCool": {
+        "title": "Use Dry mode for Cooling",
+        "type": "boolean",
+        "default": false
+      }
+    }
+  }
+}
