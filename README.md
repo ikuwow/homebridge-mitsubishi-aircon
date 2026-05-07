@@ -5,13 +5,6 @@ Homebridge plugin for Mitsubishi air conditioners that talk to the Japanese
 (RacEstVis) Web service. Fork of
 [japaniot/homebridge-mitsubishi-aircon](https://github.com/japaniot/homebridge-mitsubishi-aircon).
 
-## Status
-
-This release (`2.0.0-alpha.x`) targets Homebridge v1.x only. Homebridge v2
-support is planned for `2.0.0` and tracked separately. Use `1.0.x` of the
-upstream package if you need a stable release on Homebridge v1.x without
-the fork's metadata changes.
-
 ## Why this fork
 
 The upstream plugin uses two Homebridge APIs that were removed in
@@ -21,6 +14,9 @@ is no actively maintained alternative for the Japan-only Kirigamine
 REMOTE / RacEstVis backend, so this fork keeps the existing reverse
 engineered protocol implementation and rebuilds the surrounding
 packaging.
+
+The current `2.0.0-alpha.x` line still targets Homebridge v1.x only; v2
+support will land in `2.0.0`.
 
 ## Requirements
 
@@ -67,17 +63,13 @@ npm install -g @ikuwow/homebridge-mitsubishi-aircon
 ## Notes
 
 - The plugin talks to `https://wwwl12.mitsubishielectric.co.jp/RacEstVis/`
-  using the protocol decoded in
-  [`lib/parse.js`](lib/parse.js). The protocol is a third-party reverse
-  engineering effort with no public spec; Mitsubishi may change or
-  retire this endpoint at any time.
-- Account login currently works for both 霧ヶ峰 REMOTE and accounts
-  migrated to MyMU / くらしID, since the RacEstVis endpoint still
-  responds for the legacy session flow. This is observed behavior, not
-  a Mitsubishi guarantee.
-- Background polling runs every 30 seconds. Transient `socket hang up`
-  errors are caught and ignored; the next polling cycle recovers
-  automatically.
+  using a third-party reverse engineering of the Mitsubishi RAC command
+  protocol (no public spec). Mitsubishi may change or retire this
+  endpoint at any time.
+- The maintainer's account is migrated to MyMU / くらしID and the
+  RacEstVis endpoint still responds for the legacy session flow as of
+  the latest release. Other migrated accounts have not been tested;
+  please open an issue if login fails.
 
 ## References
 
