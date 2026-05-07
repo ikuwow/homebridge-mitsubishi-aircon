@@ -1,7 +1,7 @@
 {
   "name": "@ikuwow/homebridge-mitsubishi-aircon",
   "displayName": "Mitsubishi Aircon",
-  "version": "2.0.0-alpha.1",
+  "version": "2.0.1-alpha.1",
   "description": "Homebridge plugin for Mitsubishi air conditioners (Kirigamine REMOTE / RacEstVis Web service, Japan)",
   "main": "lib/index.js",
   "files": [
