@@ -1,5 +1,7 @@
 # @ikuwow/homebridge-mitsubishi-aircon
 
+[![npm](https://img.shields.io/npm/v/@ikuwow/homebridge-mitsubishi-aircon)](https://www.npmjs.com/package/@ikuwow/homebridge-mitsubishi-aircon)
+
 Homebridge plugin for Mitsubishi air conditioners that talk to the Japanese
 [霧ヶ峰 REMOTE](https://www.mitsubishielectric.co.jp/home/kirigamine/function/remote/)
 (RacEstVis) Web service. Fork of
