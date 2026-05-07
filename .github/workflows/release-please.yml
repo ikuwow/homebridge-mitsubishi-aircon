@@ -1,0 +1,49 @@
+name: release-please
+
+on:
+  push:
+    branches: [master]
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: googleapis/release-please-action@v4
+        id: release
+        with:
+          release-type: node
+
+      # The steps below run only when a Release PR was just merged
+      # (i.e. release-please created a new GitHub Release + tag).
+      - uses: actions/checkout@v6
+        if: ${{ steps.release.outputs.release_created }}
+
+      - uses: actions/setup-node@v6
+        if: ${{ steps.release.outputs.release_created }}
+        with:
+          node-version: 22
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        if: ${{ steps.release.outputs.release_created }}
+        run: npm install --no-save
+
+      - name: Run tests
+        if: ${{ steps.release.outputs.release_created }}
+        run: npm test
+
+      - name: Show package contents
+        if: ${{ steps.release.outputs.release_created }}
+        run: npm pack --dry-run
+
+      - name: Publish to npm
+        if: ${{ steps.release.outputs.release_created }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --access public
